@@ -12,3 +12,11 @@ from transformers import Wav2Vec2Processor, Wav2Vec2ForCTC
 from flash.audio import SpeechRecognition, SpeechRecognitionData
 
 st.title("Audio Transcription")
+
+
+uploaded_file = st.file_uploader("Choose an audio file")
+
+if uploaded_file is not None:
+  a = uploaded_file.read()
+  st.write(type(a), a)
+  # file_bytes = np.asarray(bytearray(uploaded_file.read()))
