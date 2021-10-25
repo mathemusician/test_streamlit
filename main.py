@@ -19,6 +19,6 @@ uploaded_file = st.file_uploader("Choose an audio file")
 if uploaded_file is not None:
   a = uploaded_file.read()
   b = deepcopy(a)
-  b = bytes(str(b), "utf-8")
+  # b = bytes(str(b), "utf-8")
   st.write(a == b)
   # file_bytes = np.asarray(bytearray(uploaded_file.read()))
