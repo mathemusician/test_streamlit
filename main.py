@@ -18,5 +18,5 @@ uploaded_file = st.file_uploader("Choose an audio file")
 
 if uploaded_file is not None:
   a = uploaded_file.read()
-  st.write(type(a), a)
+  st.write(type(a))
   # file_bytes = np.asarray(bytearray(uploaded_file.read()))
