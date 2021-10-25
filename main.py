@@ -22,7 +22,7 @@ uploaded_file = st.file_uploader("Choose an audio file")
 
 if uploaded_file is not None:
   new_rate = 16000
-  sample_rate, clip = wavfile.read(io.BytesIO(uploaded_file.read()))
+  sample_rate, clip = soundfile.read(io.BytesIO(uploaded_file.read()))
   number_of_samples = round(len(clip) * float(new_rate) / sample_rate)
   clip = sps.resample(clip, number_of_samples)
   # b = bytes(str(b), "utf-8")
