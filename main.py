@@ -10,6 +10,7 @@ from pathlib import Path
 from copy import deepcopy
 from transformers import Wav2Vec2Processor, Wav2Vec2ForCTC
 from flash.audio import SpeechRecognition, SpeechRecognitionData
+import io
 
 st.title("Audio Transcription")
 
