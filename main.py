@@ -3,7 +3,8 @@ import streamlit as st
 import numpy as np
 
 # importing moviepy module
-from moviepy.editor import * from moviepy.video.tools.segmenting import findObjects
+from moviepy.editor import *
+from moviepy.video.tools.segmenting import findObjects
 
 # screen size
 screensize = (720, 460)
