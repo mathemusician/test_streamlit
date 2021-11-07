@@ -1,12 +1,12 @@
 import streamlit as st
 import gdown
 import os
-from pathed import Path
+from pathlib import Path
 
-cwd = Path(os.getcwd(), custom=True)
+cwd = Path(".")
 st.title("Audio Transcription")
 
-list_of_vids = filedir.find("*.mov")
+list_of_vids = cwd.glob("*.mov")
 
 if "Success4.mov" not in list_of_vids:
   url = "https://drive.google.com/file/d/1kUO0dKTsq4E2rFH1_JehUZC23giwVtY3/view?usp=sharing"
