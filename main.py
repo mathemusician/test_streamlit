@@ -1,8 +1,9 @@
 import streamlit as st
 import gdown
-from pathed import filedir
+import os
+from pathed import Path
 
-
+cwd = Path(os.getcwd(), custom=True)
 st.title("Audio Transcription")
 
 list_of_vids = filedir.find("*.mov")
