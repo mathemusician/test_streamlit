@@ -7,7 +7,7 @@ cwd = Path(".")
 st.title("Audio Transcription")
 
 list_of_vids = cwd.glob("*.mov")
-st.write(list_of_vids)
+st.write([i for i in list_of_vids])
 
 if "Success4.mov" not in list_of_vids:
   url = "https://drive.google.com/uc?id=1kUO0dKTsq4E2rFH1_JehUZC23giwVtY3"
