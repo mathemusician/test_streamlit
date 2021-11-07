@@ -1,10 +1,31 @@
+import streamlit as st
+import gdown
+from pathed import cwd
+
+
+st.title("Audio Transcription")
+
+list_of_vids = cwd.find("*.mov")
+
+if "Success4.mov" not in list_of_vids:
+  url = "https://drive.google.com/file/d/1kUO0dKTsq4E2rFH1_JehUZC23giwVtY3/view?usp=sharing"
+  output = "Success4.mov"
+  gdown.download(url, output, quiet=False)
+  st.write("Got it second time")
+else:
+  st.write("Got it first time")
+
+  
+  
+
+
+"""
 import torch
 import librosa
 import difflib
 import soundfile
 import numpy as np
 import pickle as pl
-import streamlit as st
 from transformers import Wav2Vec2Processor
 from pathlib import Path
 from copy import deepcopy
@@ -13,11 +34,9 @@ from flash.audio import SpeechRecognition, SpeechRecognitionData
 import io
 import scipy.signal as sps
 from scipy.io import wavfile
+"""
 
-
-st.title("Audio Transcription")
-
-
+"""
 uploaded_file = st.file_uploader("Choose an audio file")
 
 if uploaded_file is not None:
@@ -29,3 +48,4 @@ if uploaded_file is not None:
   # resampled_audio = librosa.resample(x, sr, 16000)
   # st.write(sr, x)
   # file_bytes = np.asarray(bytearray(uploaded_file.read()))
+"""
