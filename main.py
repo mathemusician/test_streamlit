@@ -9,7 +9,7 @@ st.title("Audio Transcription")
 list_of_vids = cwd.glob("*.mov")
 
 if "Success4.mov" not in list_of_vids:
-  url = "https://drive.google.com/file/d/1kUO0dKTsq4E2rFH1_JehUZC23giwVtY3/view?usp=sharing"
+  url = "https://drive.google.com/uc?id=1kUO0dKTsq4E2rFH1_JehUZC23giwVtY3"
   output = "Success4.mov"
   gdown.download(url, output, quiet=False)
   st.write("Got it second time")
