@@ -6,7 +6,9 @@ from pathlib import Path
 cwd = Path(".")
 st.title("Audio Transcription")
 
-list_of_vids = [i.str() for i in cwd.glob("*.mov")]
+file_finder = cwd.glob("*.mov")
+list_of_vids = [str(i) for i in file_finder]
+st.write(list_of_vids)
 
 if "Success4.mov" not in list_of_vids:
   url = "https://drive.google.com/uc?id=1kUO0dKTsq4E2rFH1_JehUZC23giwVtY3"
