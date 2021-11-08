@@ -1,33 +1,65 @@
-import streamlit as st
-import gdown
-from moviepy.editor import ColorClip, TextClip
-from moviepy.video.tools.subtitles import SubtitlesClip
-from pathlib import Path
+import numpy as np
 
-cwd = Path(".")
+from moviepy.editor import *
+from moviepy.video.tools.segmenting import findObjects
 
-file_finder = cwd.glob("*.mov")
-list_of_vids = [str(i) for i in file_finder]
+# WE CREATE THE TEXT THAT IS GOING TO MOVE, WE CENTER IT.
 
-st.write("Video Creation")
+screensize = (720,460)
+txtClip = TextClip('Cool effect',color='white', font="Amiri-Bold",
+                   kerning = 5, fontsize=100)
+cvc = CompositeVideoClip( [txtClip.set_pos('center')],
+                        size=screensize)
 
-if "Success4.mov" not in list_of_vids:
-        url = "https://drive.google.com/uc?id=1kUO0dKTsq4E2rFH1_JehUZC23giwVtY3"
-        output = "Success4.mov"
-        gdown.download(url, output, quiet=False)
+# THE NEXT FOUR FUNCTIONS DEFINE FOUR WAYS OF MOVING THE LETTERS
+
+
+# helper function
+rotMatrix = lambda a: np.array( [[np.cos(a),np.sin(a)], 
+                                 [-np.sin(a),np.cos(a)]] )
+
+def vortex(screenpos,i,nletters):
+    d = lambda t : 1.0/(0.3+t**8) #damping
+    a = i*np.pi/ nletters # angle of the movement
+    v = rotMatrix(a).dot([-1,0])
+    if i%2 : v[1] = -v[1]
+    return lambda t: screenpos+400*d(t)*rotMatrix(0.5*d(t)*a).dot(v)
     
-generator = lambda txt: TextClip(txt, font='Arial', fontsize=24, color='white')
-subs = [((0, 4), 'subs1'),
-        ((4, 9), 'subs2'),
-        ((9, 12), 'subs3'),
-        ((12, 16), 'subs4')]
+def cascade(screenpos,i,nletters):
+    v = np.array([0,-1])
+    d = lambda t : 1 if t<0 else abs(np.sinc(t)/(1+t**4))
+    return lambda t: screenpos+v*400*d(t-0.15*i)
 
-subtitles = SubtitlesClip(subs, generator)
+def arrive(screenpos,i,nletters):
+    v = np.array([-1,0])
+    d = lambda t : max(0, 3-3*t)
+    return lambda t: screenpos-400*v*d(t-0.2*i)
+    
+def vortexout(screenpos,i,nletters):
+    d = lambda t : max(0,t) #damping
+    a = i*np.pi/ nletters # angle of the movement
+    v = rotMatrix(a).dot([-1,0])
+    if i%2 : v[1] = -v[1]
+    return lambda t: screenpos+400*d(t-0.1*i)*rotMatrix(-0.2*d(t)*a).dot(v)
 
-video = VideoFileClip("input.mp4")
-result = CompositeVideoClip([video, subtitles.set_pos(('center','bottom'))])
-
-result.write_videofile("output.mp4", fps=video.fps)
 
 
-st.video('output.mp4')
+# WE USE THE PLUGIN findObjects TO LOCATE AND SEPARATE EACH LETTER
+
+letters = findObjects(cvc) # a list of ImageClips
+
+
+# WE ANIMATE THE LETTERS
+
+def moveLetters(letters, funcpos):
+    return [ letter.set_pos(funcpos(letter.screenpos,i,len(letters)))
+              for i,letter in enumerate(letters)]
+
+clips = [ CompositeVideoClip( moveLetters(letters,funcpos),
+                              size = screensize).subclip(0,5)
+          for funcpos in [vortex, cascade, arrive, vortexout] ]
+
+# WE CONCATENATE EVERYTHING AND WRITE TO A FILE
+
+final_clip = concatenate_videoclips(clips)
+final_clip.write_videofile('../../coolTextEffects.avi',fps=25,codec='mpeg4')
