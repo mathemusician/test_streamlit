@@ -1,5 +1,6 @@
 gdown==3.14.0
 moviepy==1.0.3
+scipy
 #flash==1.0.3
 #librosa==0.8.1
 #lightning_flash==0.5.0
