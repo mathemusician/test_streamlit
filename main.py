@@ -23,12 +23,9 @@ frame_index = -1
 def pipeline(frame):
     global frame_index
     frame_index += 1
-    try:
         global x
         cv2.putText(frame, str(frame_index), (0, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 3, cv2.LINE_AA)
         x = frame
-    except StopIteration:
-        pass
     # additional frame manipulation
     return frame
 
@@ -40,5 +37,5 @@ out_video = video.fl_image(pipeline)
 out_video.write_videofile("color2.mp4", codec="libx264")
 
 st.image(x)
-
+st.write(frame_index)
 st.video("color2.mp4")
