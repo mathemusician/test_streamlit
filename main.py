@@ -13,6 +13,6 @@ def pipeline(frame):
 
 dfi = pd.DataFrame({'c1': ["Hello", "World"]}).iterrows()
 
-video = VideoFileClip("video.mp4")
+video = VideoFileClip("output.mp4")
 out_video = video.fl_image(pipeline)
 out_video.write_videofile("vidout.mp4", audio=True)
