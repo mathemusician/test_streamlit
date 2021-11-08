@@ -5,7 +5,7 @@ from pathlib import Path
 file_path = Path("/etc/ImageMagick-6/policy.xml")
 
 with open(file_path) as file_handler:
-	lines = file_handler.read()
+	lines = file_handler.readlines()
 
 st.write(lines)
 
