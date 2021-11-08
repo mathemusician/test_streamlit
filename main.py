@@ -5,7 +5,7 @@ import pickle as pl
 import base64
 
 st.write(os.getcwd())
-os.environ["MAGICK_CONFIGURE_PATH"] = "policy.xml"
+os.environ["MAGICK_CONFIGURE_PATH"] = "/app/test_streamlit/policy.xml"
 
 
 # importing Numpy
