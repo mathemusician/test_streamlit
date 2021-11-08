@@ -11,7 +11,7 @@ def pipeline(frame):
     return frame
 
 
-dfi = pd.DataFrame({'c1': ["Hello", "World"]).iterrows()
+dfi = pd.DataFrame({'c1': ["Hello", "World"]}).iterrows()
 
 video = VideoFileClip("video.mp4")
 out_video = video.fl_image(pipeline)
