@@ -2,6 +2,12 @@ import streamlit as st
 import gdown
 from moviepy.editor import ColorClip, TextClip
 from moviepy.video.tools.subtitles import SubtitlesClip
+from pathlib import Path
+
+cwd = Path(".")
+
+file_finder = cwd.glob("*.mov")
+list_of_vids = [str(i) for i in file_finder]
 
 st.write("Video Creation")
 
