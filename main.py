@@ -4,7 +4,7 @@ from moviepy.editor import VideoFileClip
 
 def pipeline(frame):
     try:
-        cv2.putText(frame, str(next(dfi)[1].sentence), (0, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 3, cv2.LINE_AA, True)
+        cv2.putText(frame, str(next(dfi)[1].item()), (0, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 3, cv2.LINE_AA, True)
     except StopIteration:
         pass
     # additional frame manipulation
