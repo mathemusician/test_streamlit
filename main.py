@@ -7,7 +7,27 @@ file_path = Path("/etc/ImageMagick-6/policy.xml")
 with open(file_path) as file_handler:
 	lines = file_handler.readlines()
 
-st.write(lines)
+distasteful = [
+	"  <!-- disable ghostscript format types -->\n",
+	"  <policy domain=\"coder\" rights=\"none\" pattern=\"PS\" />\n",
+	"  <policy domain=\"coder\" rights=\"none\" pattern=\"PS2\" />\n",
+	"  <policy domain=\"coder\" rights=\"none\" pattern=\"PS3\" />\n",
+	"  <policy domain=\"coder\" rights=\"none\" pattern=\"EPS\" />\n",
+	"  <policy domain=\"coder\" rights=\"none\" pattern=\"PDF\" />\n",
+	"  <policy domain=\"coder\" rights=\"none\" pattern=\"XPS\" />\n"
+]
+	
+newlines = []
+for line in lines:
+	if line in distasteful:
+		continue
+	else:
+		newlines.append(line)
+
+newtext = "".join(newlines)
+
+with open(file_path, "w") as file_handler:
+	file_handler.write(newtext)
 
 """
 # importing Numpy
