@@ -5,13 +5,12 @@ import streamlit as st
 from PIL import Image, ImageDraw, ImageFont
 
 
-i = 0
+x = 0
 def pipeline(frame):
-    global i
-    i += 1
     try:
-        '''
+        global x
         cv2.putText(frame, str(next(dfi)[1].item()), (0, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 3, cv2.LINE_AA, True)
+        
         '''
         pil_im = Image.fromarray(frame)
 
@@ -26,6 +25,8 @@ def pipeline(frame):
         # Save the image
         # frame = cv2.cvtColor(np.array(pil_im), cv2.COLOR_RGB2BGR)
         frame = np.array(pil_im)
+        '''
+        x = frame
     except StopIteration:
         pass
     # additional frame manipulation
@@ -38,6 +39,6 @@ video = VideoFileClip("color.mp4")
 out_video = video.fl_image(pipeline)
 out_video.write_videofile("color2.mp4", codec="libx264")
 
-st.write(i)
+st.image(x)
 
 st.video("color2.mp4")
