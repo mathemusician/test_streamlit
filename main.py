@@ -19,11 +19,13 @@ if "Success4.mov" not in list_of_vids:
     gdown.download(url, output, quiet=False)
 
 
-x = 0
+frame_index = -1
 def pipeline(frame):
+    global frame_index
+    frame_index += 1
     try:
         global x
-        cv2.putText(frame, str(next(dfi)[1].item()), (0, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 3, cv2.LINE_AA)
+        cv2.putText(frame, str(frame_index), (0, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 3, cv2.LINE_AA)
         x = frame
     except StopIteration:
         pass
@@ -31,7 +33,7 @@ def pipeline(frame):
     return frame
 
 
-dfi = pd.DataFrame({'c1': [str(i) for i in range(160)]}).iterrows()
+# dfi = pd.DataFrame({'c1': [str(i) for i in range(160)]}).iterrows()
 
 video = VideoFileClip("Success4.mov")
 out_video = video.fl_image(pipeline)
