@@ -7,3 +7,4 @@ result = ColorClip(size=(200, 100),
 		   color=(0,0,0), 
 		   duration=5).write_videofile('color.mp4', fps=24)
 
+st.video('color.mp4')
