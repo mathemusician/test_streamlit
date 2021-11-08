@@ -1,5 +1,7 @@
 gdown==3.14.0
 moviepy==1.0.3
+numpy
+opencv-python-headless
 #scipy
 #flash==1.0.3
 #librosa==0.8.1
