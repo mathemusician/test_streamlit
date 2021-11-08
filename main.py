@@ -9,8 +9,22 @@ def pipeline(frame):
     global i
     i += 1
     try:
-        st.write(type(frame))
+        '''
         cv2.putText(frame, str(next(dfi)[1].item()), (0, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 3, cv2.LINE_AA, True)
+        '''
+        pil_im = Image.fromarray(frame)
+
+        draw = ImageDraw.Draw(pil_im)
+
+        # Choose a font
+        font = ImageFont.truetype("Roboto-Regular.ttf", 50)
+
+        # Draw the text
+        draw.text((0, 0), "Your Text Here", font=font)
+
+        # Save the image
+        # frame = cv2.cvtColor(np.array(pil_im), cv2.COLOR_RGB2BGR)
+        frame = np.array(pil_im)
     except StopIteration:
         pass
     # additional frame manipulation
