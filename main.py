@@ -4,23 +4,9 @@ from pathlib import Path
 import pickle as pl
 import base64
 
-#os.environ["MAGICK_CONFIGURE_PATH"] = "policy.xml"
-
-file_path = Path("/etc/ImageMagick-6/policy.xml")
+os.environ["MAGICK_CONFIGURE_PATH"] = "policy.xml"
 
 
-
-def download_data(data):
-    output_data = pl.dumps(data)
-    b64 = base64.b64encode(output_data).decode()
-    href = f'<a href="data:file/output_data;base64,{b64}" download="myfile.pkl">Download data .pkl File</a>'
-    st.markdown(href, unsafe_allow_html=True)
-
-with open(file_path, "rb") as file_handler:
-	download_data(file_handler.read())
-
-
-"""
 # importing Numpy
 import numpy as np
 
@@ -96,7 +82,7 @@ final_clip.fps = 24
 
 # showing video clip
 final_clip.ipython_display()
-"""
+
 
   
   
