@@ -1,33 +1,24 @@
+import os
 import streamlit as st
 from pathlib import Path
+import pickle as pl
+import base64
 
+#os.environ["MAGICK_CONFIGURE_PATH"] = "policy.xml"
 
 file_path = Path("/etc/ImageMagick-6/policy.xml")
 
-with open(file_path) as file_handler:
-	lines = file_handler.readlines()
 
-distasteful = [
-	"  <!-- disable ghostscript format types -->\n",
-	"  <policy domain=\"coder\" rights=\"none\" pattern=\"PS\" />\n",
-	"  <policy domain=\"coder\" rights=\"none\" pattern=\"PS2\" />\n",
-	"  <policy domain=\"coder\" rights=\"none\" pattern=\"PS3\" />\n",
-	"  <policy domain=\"coder\" rights=\"none\" pattern=\"EPS\" />\n",
-	"  <policy domain=\"coder\" rights=\"none\" pattern=\"PDF\" />\n",
-	"  <policy domain=\"coder\" rights=\"none\" pattern=\"XPS\" />\n"
-]
-	
-newlines = []
-for line in lines:
-	if line in distasteful:
-		continue
-	else:
-		newlines.append(line)
 
-newtext = "".join(newlines)
+def download_data(data):
+    output_data = pl.dumps(data)
+    b64 = base64.b64encode(output_data).decode()
+    href = f'<a href="data:file/output_data;base64,{b64}" download="myfile.pkl">Download data .pkl File</a>'
+    st.markdown(href, unsafe_allow_html=True)
 
-with open(file_path, "w") as file_handler:
-	file_handler.write(newtext)
+with open(file_path, "rb") as file_handler:
+	download_data(file_handler.read())
+
 
 """
 # importing Numpy
