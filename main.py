@@ -4,7 +4,7 @@ from pathlib import Path
 import pickle as pl
 import base64
 
-st.write(Path("."))
+st.write(os.getcwd())
 os.environ["MAGICK_CONFIGURE_PATH"] = "policy.xml"
 
 
