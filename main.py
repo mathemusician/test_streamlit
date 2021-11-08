@@ -23,9 +23,9 @@ frame_index = -1
 def pipeline(frame):
     global frame_index
     frame_index += 1
-        global x
-        cv2.putText(frame, str(frame_index), (0, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 3, cv2.LINE_AA)
-        x = frame
+    global x
+    cv2.putText(frame, str(frame_index), (0, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 3, cv2.LINE_AA)
+    x = frame
     # additional frame manipulation
     return frame
 
