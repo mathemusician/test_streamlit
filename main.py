@@ -16,3 +16,6 @@ dfi = pd.DataFrame({'c1': ["Hello", "World"]}).iterrows()
 video = VideoFileClip("color.mp4")
 out_video = video.fl_image(pipeline)
 out_video.write_videofile("color2.mp4", audio=True)
+
+
+st.video("color2.mp4")
