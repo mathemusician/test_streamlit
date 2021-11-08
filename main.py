@@ -1,8 +1,22 @@
 import cv2
+import gdown
 import pandas as pd
+from pathlib import Path
 from moviepy.editor import VideoFileClip
 import streamlit as st
 from PIL import Image, ImageDraw, ImageFont
+
+
+cwd = Path(".")
+st.title("Video Transcription")
+
+file_finder = cwd.glob("*.mov")
+list_of_vids = [str(i) for i in file_finder]
+
+if "Success4.mov" not in list_of_vids:
+    url = "https://drive.google.com/uc?id=1kUO0dKTsq4E2rFH1_JehUZC23giwVtY3"
+    output = "Success4.mov"
+    gdown.download(url, output, quiet=False)
 
 
 x = 0
@@ -20,7 +34,7 @@ def pipeline(frame):
 
 dfi = pd.DataFrame({'c1': ["Hello", "World"]*60}).iterrows()
 
-video = VideoFileClip("Success4.mp4")
+video = VideoFileClip("Success4.mov")
 out_video = video.fl_image(pipeline)
 out_video.write_videofile("color2.mp4", codec="libx264")
 
