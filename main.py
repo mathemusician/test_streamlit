@@ -31,7 +31,7 @@ def pipeline(frame):
     return frame
 
 
-dfi = pd.DataFrame({'c1': ["Hello", "World"]*60}).iterrows()
+dfi = pd.DataFrame({'c1': ["Hello", "World"]*80}).iterrows()
 
 video = VideoFileClip("Success4.mov")
 out_video = video.fl_image(pipeline)
