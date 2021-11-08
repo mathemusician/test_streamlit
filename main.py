@@ -10,7 +10,9 @@ def pipeline(frame):
     # additional frame manipulation
     return frame
 
-dfi = pd.read_csv('data.csv').iterrows()
-video = VideoFileClip("vid.mp4")
+
+dfi = pd.DataFrame({'c1': ["Hello", "World"]).iterrows()
+
+video = VideoFileClip("video.mp4")
 out_video = video.fl_image(pipeline)
 out_video.write_videofile("vidout.mp4", audio=True)
