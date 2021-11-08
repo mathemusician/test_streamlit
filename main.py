@@ -23,7 +23,7 @@ x = 0
 def pipeline(frame):
     try:
         global x
-        cv2.putText(frame, str(next(dfi)[1].item()), (0, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 3, cv2.LINE_AA)
+        cv2.putText(frame, str(next(dfi)[1].item()), (0, 0), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 3, cv2.LINE_AA)
         x = frame
     except StopIteration:
         pass
