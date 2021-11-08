@@ -2,8 +2,12 @@ import streamlit as st
 from pathlib import Path
 
 
+file_path = Path("/etc/ImageMagick-6/policy.xml")
 
-st.write(Path("/etc/ImageMagick-6/policy.xml").exists())
+with open(file_path) as file_handler:
+	lines = file_handler.read()
+
+st.write(lines)
 
 """
 # importing Numpy
