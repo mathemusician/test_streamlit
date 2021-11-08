@@ -9,6 +9,7 @@ def pipeline(frame):
     global i
     i += 1
     try:
+        st.write(type(frame))
         cv2.putText(frame, str(next(dfi)[1].item()), (0, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 3, cv2.LINE_AA, True)
     except StopIteration:
         pass
