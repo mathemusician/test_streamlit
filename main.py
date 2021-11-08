@@ -1,4 +1,11 @@
 import streamlit as st
+from pathlib import Path
+
+
+
+st.write(Path("/etc/ImageMagick-6/policy.xml").exists())
+
+"""
 # importing Numpy
 import numpy as np
 
@@ -74,7 +81,7 @@ final_clip.fps = 24
 
 # showing video clip
 final_clip.ipython_display()
-
+"""
 
   
   
