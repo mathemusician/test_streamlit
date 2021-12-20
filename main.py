@@ -62,16 +62,21 @@ for t in tqdm(range(0, len_t-1)):
 # add initial temperature of water
 T = T + T_W0
 
-t_ = st.slider(
-    'time (years)',
-    0.0,
-    t_final/31536000,
-    t_final/31536000/1000
-)
+def main():
+    t_ = st.slider(
+        'time (years)',
+        0.0,
+        t_final/31536000,
+        t_final/31536000/1000
+    )
 
-time = int(t_ * 31536000 / t_final * (len_t-1))
+    time = int(t_ * 31536000 / t_final * (len_t-1))
 
 
-st.line_chart(
-    T[time,:]
-)
+    st.line_chart(
+        T[time,:]
+    )
+
+
+if __name__ == "__main__":
+    main()
