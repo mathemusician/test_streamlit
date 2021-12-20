@@ -4,6 +4,7 @@ import streamlit as st
 import numpy as np
 from scipy.sparse import diags
 from tqdm import tqdm
+import matplotlib.pyplot as plt
 
 
 K_R = 2.596 # (J/s*m*C) thermal conductivity of rock
@@ -61,15 +62,16 @@ for t in tqdm(range(0, len_t-1)):
 # add initial temperature of water
 T = T + T_W0
 
-import matplotlib.pyplot as plt
-from ipywidgets import interact
+t_ = st.slider(
+    'time (years)',
+    0,
+    t_final/31536000,
+    t_final/31536000/1000
+)
 
-@interact(t_=(0,t_final/31536000,t_final/31536000/1000))
-def plot(t_):
-    time = int(t_*31536000/t_final*(len_t-1))
-    plt.plot(
-        x_array,
-        T[time,:]
-    )
-    plt.ylim(T_W0,T_R0)
-    plt.show()
+time = int(t_ * 31536000 / t_final * (len_t-1))
+
+
+st.line_chart(
+    T[time,:]
+)
