@@ -64,7 +64,7 @@ T = T + T_W0
 
 t_ = st.slider(
     'time (years)',
-    0,
+    0.0,
     t_final/31536000,
     t_final/31536000/1000
 )
